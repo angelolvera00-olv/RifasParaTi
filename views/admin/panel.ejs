@@ -1,0 +1,51 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h1>Panel de Control</h1>
+                <div>
+                    <span class="me-3">Bienvenido, <strong><%= user.username %></strong></span>
+                    <a href="/admin/logout" class="btn btn-danger">Cerrar Sesión</a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Iniciar Rifa</h5>
+                            <p class="card-text">Gestiona detalles de una nueva rifa</p>
+                            <a href="/Reiniciar" class="btn btn-outline-success">Ver Más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Gestionar Números</h5>
+                            <p class="card-text">Ver y aprobar números de rifas</p>
+                            <a href="/Aprobar" class="btn btn-outline-success">Ver Más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">Participantes</h5>
+                            <p class="card-text">Ver lista de participantes registrados</p>
+                            <a href="/Lista" class="btn btn-outline-success">Ver Más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info mt-4">
+                <strong>Nota:</strong> Este es tu panel de administración. Aquí podrás gestionar toda la información de las rifas.
+            </div>
+        </div>
+    </div>
+</div>

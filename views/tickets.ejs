@@ -1,0 +1,83 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container my-5">
+        <div class="position-relative mb-4 text-center">
+            <h2>Selecciona hasta 5 números</h2>
+            <span id="selection-count" class="badge bg-primary position-absolute top-0 end-0">0/5</span>
+        </div>
+        <div class="container mb-5">
+            <div class="d-flex align items-center gap-2 justify-content-center">
+                <button class=" btn btn-success numero-btn"></button> <span>Libres</span>
+                    <button class="btn btn-warning numero-btn"></button> <span>Apartados</span>
+                    <button class="btn btn-danger numero-btn"></button> <span>Asignados</span>
+                
+            </div>
+        </div>
+        <form id="selection-form" method="GET" action="/register">
+            <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
+                <% numbers.forEach(num=> { %>
+                    <button type="button"
+                        class="btn <%= num.status === 'libre' ? 'btn-success' : (num.status === 'apartado' ? 'btn-warning' : 'btn-danger') %> numero-btn ticket-btn"
+                        data-number="<%= num.number %>" data-id="<%= num._id %>" <%=num.status !=='libre' ? 'disabled'
+                        : '' %>>
+                        <%= num.number %>
+                    </button>
+                    <% }) %>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" id="confirm-btn" class="btn btn-primary btn-lg" disabled>
+                    Proceder a Registrarse
+                </button>
+            </div>
+
+            <div id="hidden-inputs"></div>
+        </form>
+    </div>
+
+    <script>
+        const MAX_SELECTIONS = 5;
+        let selectedNumbers = [];
+
+        document.querySelectorAll('.ticket-btn:not(:disabled)').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const number = this.dataset.number;
+                const id = this.dataset.id;
+
+                if (selectedNumbers.includes(number)) {
+                    selectedNumbers = selectedNumbers.filter(n => n !== number);
+                    this.classList.remove('btn-warning');
+                    this.classList.add('btn-success');
+                } else if (selectedNumbers.length < MAX_SELECTIONS) {
+                    selectedNumbers.push(number);
+                    this.classList.remove('btn-success');
+                    this.classList.add('btn-warning');
+                }
+
+                document.getElementById('selection-count').textContent = `${selectedNumbers.length}/${MAX_SELECTIONS}`;
+                document.getElementById('confirm-btn').disabled = selectedNumbers.length === 0;
+
+                updateHiddenInputs();
+            });
+        });
+
+        function updateHiddenInputs() {
+            const container = document.getElementById('hidden-inputs');
+            container.innerHTML = '';
+            selectedNumbers.forEach(number => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'numbers';
+                input.value = number;
+                container.appendChild(input);
+            });
+        }
+
+        document.getElementById('selection-form').addEventListener('submit', function (e) {
+            if (selectedNumbers.length === 0) {
+                e.preventDefault();
+                alert('Por favor selecciona al menos 1 número');
+            }
+        });
+    </script>

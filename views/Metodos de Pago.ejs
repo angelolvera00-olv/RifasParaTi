@@ -1,0 +1,43 @@
+<% layout('layouts/boilerplate') %>
+    <div class="container mt-5">
+        <p class="lead text-center fs-2 mb-">Realiza tu pago y envia tu comprobante al:</p>
+
+        <div class="container align-items-center">
+            <div class="card mx-auto">
+                <button class="btn btn-success fs-3"> <a class="text-decoration-none text-light"
+                        href="https://api.whatsapp.com/send?phone=16475814283"><img class="img-fluid"
+                            src="imagenes/whatsapp.png" alt="" style="max-width: 40px;"> +1 (647) 581-4283</a></button>
+                <div class="card-body text-center">
+
+                    <p class="card-text fs-4">Toma un screenshot de los números que seleccionaste y del comprobante de
+                        tu transferencia para poder participar.</p>
+                    <div class="align-items-center gap-2 fs-2 text-primary">
+                        <p><span class="fs-2"><b>Banco:</b><img class="img-fluid" style=" height:30px"
+                                    src="/imagenes/albo.png" alt=""> <img class="img-fluid" src="/imagenes/spei.png" style="height:30px" alt=""></span>
+                        </p>
+                        <p>
+                            <span class="fs-2"><b>Tarjeta:</b> <span class="text-dark" id="tarjeta">721180100038359372</span><button class="btn" onclick="copiarTarjeta()"><img class="img-fluid" style="height: 50px;" src="/imagenes/copy.png" alt=""></button></span>
+                        </p>
+                        <p>
+                            <span class="fs-2"><b>Beneficiario:</b> <span class="text-dark">Daniela López</span></span>
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        function copiarTarjeta(){
+            const tarjeta=document.getElementById('tarjeta').textContent;
+            
+
+            navigator.clipboard.writeText(tarjeta)
+        }
+    </script>
+
+    

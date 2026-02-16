@@ -1,0 +1,24 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="alert alert-success" role="alert">
+                <h2 class="mb-3">¡Registro Exitoso!</h2>
+                <p class="lead">Bienvenido <strong><%= name %></strong></p>
+                <p>Has sido registrado con los números:</p>
+                <div class="mb-3">
+                    <% numbers.forEach(num => { %>
+                        <span class="badge bg-success" style="font-size: 1.2rem; margin: 5px;">
+                            <%= num %>
+                        </span>
+                    <% }) %>
+                </div>
+                <p class="text-muted">¡Buena suerte!</p>
+                <a href="/Tickets" class="btn btn-primary mt-3">Volver a Rifas</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

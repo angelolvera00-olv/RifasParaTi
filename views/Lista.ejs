@@ -1,0 +1,34 @@
+<% layout('layouts/boilerplate') %>
+
+
+<% layout('layouts/boilerplate') %>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">Lista de Participantes</h2>
+
+    <div class="row">
+        <% Object.keys(participantes).forEach(nombre => { %>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">
+                            <%= nombre %>
+                        </h5>
+                        <hr>
+                        <p class="card-text">
+                            <strong>Números:</strong>
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-2">
+                            <% participantes[nombre].forEach(num => { %>
+                                <span class="badge bg-danger fs-6">
+                                    <%= num %>
+                                </span>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>

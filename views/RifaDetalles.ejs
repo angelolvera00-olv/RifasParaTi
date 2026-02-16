@@ -1,0 +1,80 @@
+<% layout('layouts/boilerplate') %>
+
+
+<div class="d-flex justify-content-center align-items-center mt-5">
+    <div class="container">
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <%= error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <% } %>
+        
+        <form action="/Rifa" method="POST" class="needs-validation" novalidate>
+            <div class="">
+                <label for="fecha" class="form-label">Fecha de la rifa</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" required>
+                <div class="invalid-feedback">
+                    Por favor, selecciona una fecha válida.
+                </div>
+                <div class="valid-feedback">
+                    Fecha válida.
+                </div>
+            </div>
+
+            <div class="mt-4 mb-3">
+                <label for="firstPrize" class="form-label">Premio del primer lugar</label>
+                <input type="number" class="form-control" id="firstPrize" name="firstPrize" required min="0.01" step="0.01" placeholder="Ingresa el monto del primer premio">
+                <div class="invalid-feedback">
+                    Ingresa un número positivo válido para el primer premio.
+                </div>
+                <div class="valid-feedback">
+                    Primer premio válido.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="secondPrize" class="form-label">Premio del segundo lugar</label>
+                <input type="number" class="form-control" id="secondPrize" name="secondPrize" required min="0.01" step="0.01" placeholder="Ingresa el monto del segundo premio">
+                <div class="invalid-feedback">
+                    Ingresa un número positivo válido para el segundo premio.
+                </div>
+                <div class="valid-feedback">
+                    Segundo premio válido.
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <label for="thirdPrize" class="form-label">Premio del tercer lugar</label>
+                <input type="number" class="form-control" id="thirdPrize" name="thirdPrize" required min="0.01" step="0.01" placeholder="Ingresa el monto del tercer premio">
+                <div class="invalid-feedback">
+                    Ingresa un número positivo válido para el tercer premio.
+                </div>
+                <div class="valid-feedback">
+                    Tercer premio válido.
+                </div>
+            </div>
+
+            <div class="container text-center">
+                <button type="submit" class="btn btn-info">Crear Rifa</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+            const form = document.querySelector('.needs-validation');
+            
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        })();
+    </script>
+        </form>
+    </div>
+    </div>

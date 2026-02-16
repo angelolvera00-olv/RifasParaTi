@@ -1,0 +1,66 @@
+<% layout('layouts/boilerplate') %>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+
+                <div class="card mb-5">
+
+                    <div class="card-body">
+                        <h4 class="card-title text-center fw-semibold mb-4">
+                            <%= rifa ? rifa.fecha.toLocaleDateString():'Sin Fecha' %>
+                        </h4>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush text-center">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span class="fs-2">1° Lugar</span>
+                                    <span class="fs-2">$<%= rifa ? rifa.firstPrize : 0 %>
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span class="fs-2">2° Lugar</span>
+                                    <span class="fs-2">$<%= rifa ? rifa.secondPrize : 0 %>
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span class="fs-2">3° Lugar</span>
+                                    <span class="fs-2">$<%= rifa ? rifa.thirdPrize : 0 %>
+                                    </span>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <ul class="list-group list-group-flush ">
+                            <li class="list-group-item text-center fs-4">
+                                <span class="fs-3">1 ticket</span> <span class="fs-3 mx-2 text-muted">x</span>
+                                <span class="fs-3">$15</span>
+                            </li>
+                            <li class="list-group-item text-center fs-4">
+                                <span class="fs-3">2 tickets</span> <span class="fs-3 mx-2 text-muted">x</span>
+                                <span class="fs-3">$25</span>
+                            </li>
+                            <li class="list-group-item text-center fs-4">
+                                <span class="fs-3">3 tickets</span> <span class="fs-3 mx-2 text-muted">x</span>
+                                <span class="fs-3">$35</span>
+                            </li>
+                            <li class="list-group-item text-center fs-4">
+                                <span class="fs-3">4 tickets</span> <span class="fs-3 mx-2 text-muted">x</span>
+                                <span class="fs-3">$45</span>
+                            </li>
+                            <li class="list-group-item text-center fs-4">
+                                <span class="fs-3">5 tickets</span> <span class="fs-3 mx-2 text-muted">x</span>
+                                <span class="fs-3">$55</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <p class="lead fs-2 text-center">¡Bono de regalo! ¡Si ganas y si dejas tu like y un comentario, te puedes
+                llevar <b>$1000</b> extras!</p>
+
+            <p class="lead fs-2 text-center">Se hara un video EN VIVO donde estaremos grabando la rifa y se anunciaran a
+                los ganadores el <b>
+                    <%= rifa ? rifa.fecha.toLocaleDateString():'Sin Fecha' %>
+                </b></p>
+        </div>
