@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 const Number = require('../models/numbers');
+require('dotenv').config();
+const dbURL = process.env.DB_URL;
+//'mongodb://127.0.0.1:27017/rifas-para-ti'
+require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
 
-mongoose.connect('mongodb://127.0.0.1:27017/rifas-para-ti')
+mongoose.connect(dbURL)
     .then(() => {
         console.log("Conexion abierta");
     })

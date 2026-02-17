@@ -7,7 +7,7 @@
                 <div class="card mb-5">
 
                     <div class="card-body">
-                        <h4 class="card-title text-center fw-semibold mb-4">
+                        <h4 class="card-title text-center fw-semibold mb-4 fs-2">
                             <%= rifa ? rifa.fecha.toLocaleDateString():'Sin Fecha' %>
                         </h4>
                         <div class="card-body">
@@ -56,10 +56,10 @@
                 </div>
 
             </div>
-            <p class="lead fs-2 text-center">¡Bono de regalo! ¡Si ganas y si dejas tu like y un comentario, te puedes
-                llevar <b>$1000</b> extras!</p>
+            <p class="lead fs-1 text-center"> <span class="text-primary">¡Bono de regalo!</span> ¡Si ganas y si dejas tu like y un comentario, te puedes
+                llevar <span class="text-danger">$1000</span> extras!</p>
 
-            <p class="lead fs-2 text-center">Se hara un video EN VIVO donde estaremos grabando la rifa y se anunciaran a
+            <p class="lead fs-1 text-center">Se hara un video <span class="text-danger">EN VIVO</span> donde estaremos grabando la rifa y se anunciaran a
                 los ganadores el <b>
                     <%= rifa ? rifa.fecha.toLocaleDateString():'Sin Fecha' %>
                 </b></p>

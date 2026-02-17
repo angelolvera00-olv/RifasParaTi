@@ -2,6 +2,9 @@ if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
 
+require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
+
+
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -18,8 +21,13 @@ const NumberModel = require('./models/numbers');
 const User = require('./models/user');
 const session_secret = process.env.SESSION_SECRET;
 const Rifa = require('./models/rifas')
+const dbURL = process.env.DB_URL;
+//mongodb+srv://angelolvera00_db_user:Q7MjDCK4HqiY7dWI@rifascluster.1f33cj9.mongodb.net/?appName=rifasCluster
 
-mongoose.connect('mongodb://127.0.0.1:27017/rifas-para-ti')
+//'mongodb://127.0.0.1:27017/rifas-para-ti'
+
+
+mongoose.connect(dbURL)
     .then(() => {
         console.log("Conexion abierta");
     })
