@@ -22,9 +22,20 @@ const User = require('./models/user');
 const session_secret = process.env.SESSION_SECRET;
 const Rifa = require('./models/rifas')
 const dbURL = process.env.DB_URL;
+const { MongoStore } = require('connect-mongo');
+
 //mongodb+srv://angelolvera00_db_user:Q7MjDCK4HqiY7dWI@rifascluster.1f33cj9.mongodb.net/?appName=rifasCluster
 
 //'mongodb://127.0.0.1:27017/rifas-para-ti'
+
+
+const store = MongoStore.create({
+    mongoUrl: dbURL,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+});
 
 
 mongoose.connect(dbURL)
@@ -44,12 +55,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use(session({
-    secret: session_secret,
+const sessionConfig = {
+    store,
+    name: 'session',
+    secret: 'secreto',
     resave: false,
-    saveUninitialized: true
-}))
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+app.use(session(sessionConfig));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
