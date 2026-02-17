@@ -172,7 +172,7 @@ app.post('/AprobarSeleccion', isAdmin, async (req, res) => {
     try {
         let { seleccionados } = req.body;
         if (!seleccionados || seleccionados.length === 0) {
-            return res.redirect('AprobarEntradas');
+            return res.redirect('/Aprobar');
         }
         if (!Array.isArray(seleccionados)) {
             seleccionados = [seleccionados];
@@ -180,7 +180,7 @@ app.post('/AprobarSeleccion', isAdmin, async (req, res) => {
         seleccionados = seleccionados.filter(id => id && id.trim() !== "");
 
         if (seleccionados.length === 0) {
-            return res.redirect('AprobarEntradas')
+            return res.redirect('/Aprobar')
         }
 
         const resultado = await NumberModel.updateMany({
@@ -191,9 +191,40 @@ app.post('/AprobarSeleccion', isAdmin, async (req, res) => {
                 $set: { status: 'asignado' }
             }
         );
-        res.redirect('admin/panel')
-    } catch {
+        res.redirect('/admin/panel')
+    } catch (error) {
         console.error("Error en AprobarSeleccion:", error);
+        res.status(500).send("Error interno del servidor");
+    }
+})
+
+
+app.post('/EliminarSeleccion', isAdmin, async (req, res) => {
+    try {
+        let { seleccionados } = req.body;
+        if (!seleccionados || seleccionados.length === 0) {
+            return res.redirect('/Aprobar');
+        }
+        if (!Array.isArray(seleccionados)) {
+            seleccionados = [seleccionados];
+        }
+        seleccionados = seleccionados.filter(id => id && id.trim() !== "");
+
+        if (seleccionados.length === 0) {
+            return res.redirect('/Aprobar')
+        }
+
+        const resultado = await NumberModel.updateMany({
+            _id: { $in: seleccionados },
+            status: 'apartado'
+        },
+            {
+                $set: { status: 'libre', assignedTo: "" }
+            }
+        );
+        res.redirect('/admin/panel')
+    } catch (error) {
+        console.error("Error en EliminarSeleccion:", error);
         res.status(500).send("Error interno del servidor");
     }
 })
