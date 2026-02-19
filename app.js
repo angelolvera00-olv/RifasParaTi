@@ -23,6 +23,7 @@ const session_secret = process.env.SESSION_SECRET;
 const Rifa = require('./models/rifas')
 const dbURL = process.env.DB_URL;
 const { MongoStore } = require('connect-mongo');
+const expresserror = require('./ExpressError');
 
 //mongodb+srv://angelolvera00_db_user:Q7MjDCK4HqiY7dWI@rifascluster.1f33cj9.mongodb.net/?appName=rifasCluster
 
@@ -264,22 +265,37 @@ app.get('/Lista', isAdmin, async (req, res) => {
 
 app.post('/Rifa', isAdmin, async (req, res) => {
     try {
-        const [year, month, day] = req.body.fecha.split('-').map(Number);
-        const fechaLocal = new Date(year, month - 1, day);
-        await Rifa.findOneAndUpdate({}, {
+        const firstPrize = parseFloat(req.body.firstPrize);
+        const secondPrize = parseFloat(req.body.secondPrize);
+        const thirdPrize = parseFloat(req.body.thirdPrize);
+
+        if (isNaN(firstPrize) || isNaN(secondPrize) || isNaN(thirdPrize) || firstPrize <= 0 || secondPrize <= 0 || thirdPrize <= 0) {
+            return res.render('RifaDetalles', { error: 'Por favor, completa todos los campos con valores válidos (números positivos)' });
+        }
+
+        const fechaLocal = new Date(req.body.fecha + 'T00:00:00');
+        console.log('Intentando guardar fecha:', fechaLocal, 'Premios:', firstPrize, secondPrize, thirdPrize);
+
+        const result = await Rifa.updateOne({}, {
             fecha: fechaLocal,
-            firstPrize: req.body.firstPrize,
-            secondPrize: req.body.secondPrize,
-            thirdPrize: req.body.thirdPrize
+            firstPrize: firstPrize,
+            secondPrize: secondPrize,
+            thirdPrize: thirdPrize
         },
             {
-                upsert: true,
-                runValidators: true
+                upsert: true
             }
         );
-        await NumberModel.updateMany({}, { status: "libre", assignedTo: "" })
+        
+        console.log('Resultado de updateOne:', result);
+        
+        await NumberModel.updateMany({}, { status: "libre", assignedTo: "" });
+        console.log('Numbers reiniciados');
+        
         res.redirect('/')
     } catch (error) {
+        console.error('Error completo en /Rifa:', error.message);
+        console.error('Stack:', error.stack);
         res.render('RifaDetalles', { error: 'Por favor, completa todos los campos con valores válidos (números positivos)' });
     }
 })
@@ -333,6 +349,17 @@ app.post('/register', async (req, res) => {
         res.status(500).send('Error during registration: ' + error.message);
     }
 });
+
+app.all(/(.*)/, (req, res, next) => {
+    next(new expresserror('Page Not Found', 404));
+})
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = 'Oh No, Something Went Wrong!';
+    res.status(statusCode).render('error', { err });
+})
+ 
 
 app.listen(3000, () => {
     console.log("Escuchando al servidor 3000")

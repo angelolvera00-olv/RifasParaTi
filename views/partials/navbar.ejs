@@ -1,26 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm" >
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="/imagenes/IMG_20260214_170831_411-removebg-preview.png" alt="" width="60" height="54">
-        </a>
-        <a class="navbar-brand text-light mx-0 fs-3" href="#">Rifas Para Ti</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link fs-5 px-3" href="/">Inicio</a>
-                <a class="nav-link fs-5 px-3" href="/tickets">Tickets</a>
-                <a class="nav-link fs-5 px-3" href="/Metodos">Métodos de Pago</a>
-                
-                <% if (user && user._id) { %>
-                    <a class="nav-link fs-5 px-3" href="/admin/panel">Panel de Control</a>
-                    <a class="nav-link fs-5 px-3" href="/admin/logout">Cerrar Sesión</a>
-                <% } else { %>
-                    <a class="nav-link fs-5 px-3" href="/admin/login">Admin</a>
-                <% } %>
+<nav class="navbar navbar-dark navbar-custom shadow-sm">
+
+    <div class="container-fluid">
+
+
+        <div class="w-100 d-flex d-lg-none align-items-center position-relative">
+
+            <div class="flex-fill text-start">
+                <a class=" textReduce nav-link text-white small p-0" href="/tickets">
+                    Seleccionar Tickets
+                </a>
             </div>
+
+            <div class="text-center position-absolute start-50 translate-middle-x logo-mobile mb-3">
+                <a href="/"> <img src="/imagenes/IMG_20260214_170831_411-removebg-preview.png"></a>
+            </div>
+
+            <div class="flex-fill text-end">
+                <a class="textReduce nav-link text-white small p-0" href="/Metodos">
+                    Métodos de pago
+                </a>
+            </div>
+
+        </div>
+
+
+        <div class="d-none d-lg-grid navbar-desktop align-items-center">
+
+            <div class="text-start fw-bold fs-4 text-white">
+                Rifas Para Ti
+            </div>
+
+            <div class="d-flex justify-content-center align-items-center gap-4">
+
+                <a class="nav-link fs-5 text-white" href="/tickets">
+                    Selecciona tus tickets
+                </a>
+
+                <a href="/"> <img src="/imagenes/IMG_20260214_170831_411-removebg-preview.png" class="logo-desktop"></a>
+
+                <a class="nav-link fs-5 text-white" href="/Metodos">
+                    Métodos de Pago
+                </a>
+
+            </div>
+
+            <div></div>
+
         </div>
     </div>
 </nav>
