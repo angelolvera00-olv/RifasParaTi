@@ -4,12 +4,13 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
 
-                <div class="card mb-5 border border-dark shadow">
+                <div class="card mb-5 border border-dark premios-card">
 
 
-                    <div class="card-header text-center fw-semibold fs-2 py-4 custom-header">
+                    <div class="card-header text-center fw-semibold fs-1 py-1 custom-header">
                         <% const options={ year: 'numeric' , month: 'long' , day: 'numeric' }; const formattedDate=rifa
                             ? rifa.fecha.toLocaleDateString('es-ES', options) : 'Sin Fecha' ; %>
+                            <img class="calendarImg" src="/imagenes/calendario.png" alt="">
                             <%= formattedDate %>
                     </div>
 
@@ -18,15 +19,15 @@
                         <ul class="list-group list-group-flush text-center">
 
                             <li class="list-group-item d-flex justify-content-between">
-                                <span class="fs-2 fw-semibold">1° Lugar</span>
+                                <span class="fs-1 primerLugar">1° Lugar</span>
                                 <span class="fs-2 premio-monto">
-                                    $<%= rifa ? rifa.firstPrize : 0 %>
-                                </span>
+                                    <span> <span class="text-light">$</span><%= rifa ? rifa.firstPrize : 0 %>
+                                    </span>
 
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between">
-                                <span class="fs-2">2° Lugar</span>
+                                <span class="fs-2 lugar">2° Lugar</span>
                                 <span class="fs-2 premio-monto">
                                     $<%= rifa ? rifa.secondPrize : 0 %>
                                 </span>
@@ -34,7 +35,7 @@
                             </li>
 
                             <li class="list-group-item d-flex justify-content-between">
-                                <span class="fs-2">3° Lugar</span>
+                                <span class="fs-2 lugar">3° Lugar</span>
                                 <span class="fs-2 premio-monto">
                                     $<%= rifa ? rifa.thirdPrize : 0 %>
                                 </span>
@@ -45,52 +46,55 @@
                     </div>
 
                 </div>
+                <div class="card mb-5">
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush tabla-precios text-white w-100 mx-auto"
+                            style="max-width: 900px;">
 
-                <ul class="list-group list-group-flush bg-dark text-white w-100 mx-auto mb-5" style="max-width: 900px;">
+                            <li class="list-group-item text-dark text-center fs-4 py-1 px-2">
+                                <span class="fs-3">1 🎟️</span>
+                                <span class="fs-3 mx-2 text-secondary">x</span>
+                                <span class="fs-3">$15</span>
+                            </li>
 
-                    <li class="list-group-item bg-dark text-white text-center fs-4 border-dark py-1 px-2">
-                        <span class="fs-3">1 ticket</span>
-                        <span class="fs-3 mx-2 text-secondary">x</span>
-                        <span class="fs-3">$15</span>
-                    </li>
+                            <li class="list-group-item text-dark text-center fs-4 py-1 px-2">
+                                <span class="fs-3">2 🎟️</span>
+                                <span class="fs-3 mx-2 text-secondary">x</span>
+                                <span class="fs-3">$25</span>
+                            </li>
 
-                    <li class="list-group-item bg-dark text-white text-center fs-4 border-dark py-1 px-2">
-                        <span class="fs-3">2 tickets</span>
-                        <span class="fs-3 mx-2 text-secondary">x</span>
-                        <span class="fs-3">$25</span>
-                    </li>
+                            <li class="list-group-item text-dark text-center fs-4 py-1 px-2">
+                                <span class="fs-3">3 🎟️</span>
+                                <span class="fs-3 mx-2 text-secondary">x</span>
+                                <span class="fs-3">$35</span>
+                            </li>
 
-                    <li class="list-group-item bg-dark text-white text-center fs-4 border-dark py-1 px-2">
-                        <span class="fs-3">3 tickets</span>
-                        <span class="fs-3 mx-2 text-secondary">x</span>
-                        <span class="fs-3">$35</span>
-                    </li>
+                            <li class="list-group-item text-dark text-center fs-4 py-1 px-2">
+                                <span class="fs-3">4 🎟️</span>
+                                <span class="fs-3 mx-2 text-secondary">x</span>
+                                <span class="fs-3">$45</span>
+                            </li>
 
-                    <li class="list-group-item bg-dark text-white text-center fs-4 border-dark py-1 px-2">
-                        <span class="fs-3">4 tickets</span>
-                        <span class="fs-3 mx-2 text-secondary">x</span>
-                        <span class="fs-3">$45</span>
-                    </li>
+                            <li class="list-group-item text-dark text-center fs-4 py-1 px-2">
+                                <span class="fs-3">5 🎟️</span>
+                                <span class="fs-3 mx-2 text-secondary">x</span>
+                                <span class="fs-3">$55</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="lead fs-1 text-center fw-bold"> <span class="text-primary">¡Bono de regalo!</span> ¡Si ganas y
+                    si
+                    dejas tu
+                    like y un comentario, te puedes
+                    llevar <span class="text-danger">$1000</span> extras!</p>
 
-                    <li class="list-group-item bg-dark text-white text-center fs-4 border-dark py-1 px-2">
-                        <span class="fs-3">5 tickets</span>
-                        <span class="fs-3 mx-2 text-secondary">x</span>
-                        <span class="fs-3">$55</span>
-                    </li>
-                </ul>
-
+                <p class="lead fs-1 text-center fw-bold">Se hara un video <span class="text-danger">EN VIVO</span> donde
+                    estaremos
+                    grabando la rifa y se anunciaran a
+                    los ganadores el <b>
+                        <% const options2={ year: 'numeric' , month: 'long' , day: 'numeric' }; const
+                            formattedDate2=rifa ? rifa.fecha.toLocaleDateString('es-ES', options2) : 'Sin Fecha' ; %>
+                            <%= formattedDate2 %>
+                    </b></p>
             </div>
-            <p class="lead fs-1 text-center fw-bold"> <span class="text-primary">¡Bono de regalo!</span> ¡Si ganas y si
-                dejas tu
-                like y un comentario, te puedes
-                llevar <span class="text-danger">$1000</span> extras!</p>
-
-            <p class="lead fs-1 text-center fw-bold">Se hara un video <span class="text-danger">EN VIVO</span> donde
-                estaremos
-                grabando la rifa y se anunciaran a
-                los ganadores el <b>
-                    <% const options2={ year: 'numeric' , month: 'long' , day: 'numeric' }; const formattedDate2=rifa ?
-                        rifa.fecha.toLocaleDateString('es-ES', options2) : 'Sin Fecha' ; %>
-                        <%= formattedDate2 %>
-                </b></p>
-        </div>
