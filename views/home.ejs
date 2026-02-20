@@ -4,13 +4,18 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
 
-                <div class="card mb-5 border border-dark premios-card">
+                <div class="card mb-5 premios-card">
 
 
                     <div class="card-header text-center fw-semibold fs-1 py-1 custom-header">
-                        <% const options={ year: 'numeric' , month: 'long' , day: 'numeric' }; const formattedDate=rifa
-                            ? rifa.fecha.toLocaleDateString('es-ES', options) : 'Sin Fecha' ; %>
-                            <img class="calendarImg" src="/imagenes/calendario.png" alt="">
+                        <% const options={ year: 'numeric' , month: 'long' , day: 'numeric' }; let
+                            formattedDate='Sin Fecha' ; if (rifa) { const day=rifa.fecha.getDate(); let
+                            month=rifa.fecha.toLocaleString('es-ES', { month: 'long' }); const
+                            year=rifa.fecha.getFullYear(); month=month.charAt(0).toUpperCase() + month.slice(1);
+                            formattedDate=`${day} de ${month} de ${year}`; } %>
+
+                            <img style="height: 40px; width: 40px;" class="calendarImg" src="/imagenes/calendario.png"
+                                alt="">
                             <%= formattedDate %>
                     </div>
 
@@ -18,10 +23,14 @@
                     <div class="card-body">
                         <ul class="list-group list-group-flush text-center">
 
-                            <li class="list-group-item d-flex justify-content-between">
+                            <li
+                                class="primer-lugar-item list-group-item d-flex justify-content-center align-items-center gap-4">
                                 <span class="fs-1 primerLugar">1° Lugar</span>
-                                <span class="fs-2 premio-monto">
-                                    <span> <span class="text-light">$</span><%= rifa ? rifa.firstPrize : 0 %>
+                                <span class="fs-1 premio-monto">
+                                    <span>
+                                        <span class="monto-numero">
+                                            <span class="text-light granPremio">$</span><%= rifa ? rifa.firstPrize : 0 %>
+                                        </span>
                                     </span>
 
                             </li>
